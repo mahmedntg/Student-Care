@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "243154339561",
+    "firebase_url": "https://student-care-a313d.firebaseio.com",
+    "project_id": "student-care-a313d",
+    "storage_bucket": "student-care-a313d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243154339561:android:075f6d4a8953bde3",
+        "android_client_info": {
+          "package_name": "com.example.mhamedsayed.studentcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243154339561-adi9i0ur9vargevnqm4cehpb877f8452.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mhamedsayed.studentcare",
+            "certificate_hash": "102c5c0adbd905ce6ad2cbdedfb6175e92b4be48"
+          }
+        },
+        {
+          "client_id": "243154339561-lg44v6lfirha7rvig27ngbpedhnprbbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ8T3eJQd1cX2Z7c0xkJK0aSsisdMV3Uw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243154339561-lg44v6lfirha7rvig27ngbpedhnprbbg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
