@@ -79,6 +79,7 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
                 });
         alertDialog = alertDialogBuilder.create();
         database.getReference("users").child(firebaseAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(this);
+
         intent = new Intent(this, DonorActivity.class);
     }
 
@@ -91,19 +92,34 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
             amountEditText.setVisibility(View.VISIBLE);
         }
         if (user.getType().equals(UserType.ADMIN.getValue())) {
-            acceptButton.setVisibility(View.VISIBLE);
-            rejectButton.setVisibility(View.VISIBLE);
+            if (studentRequest.getStatus().equals(RequestStatus.PENDING.getValue())) {
+                acceptButton.setVisibility(View.VISIBLE);
+                rejectButton.setVisibility(View.VISIBLE);
+            }
             studentNameTV.setVisibility(View.VISIBLE);
-            studentNameTV.setText("Student Name: " + user.getName());
             studentLevelTV.setVisibility(View.VISIBLE);
-            studentLevelTV.setText("Student Level: " + user.getLevel());
             studentState.setVisibility(View.VISIBLE);
-            studentState.setText("Student State: " + user.getState());
             studentWorkTV.setVisibility(View.VISIBLE);
-            studentWorkTV.setText("Student Work Status: " + user.getWork());
 
         }
-        progressDialog.hide();
+        database.getReference("users").child(studentRequest.getUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                studentNameTV.setText("Student Name: " + user.getName());
+                studentLevelTV.setText("Student Level: " + user.getLevel());
+                studentState.setText("Student State: " + user.getState());
+                studentWorkTV.setText("Student Work Status: " + user.getWork());
+                progressDialog.hide();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressDialog.hide();
+            }
+
+        });
+
     }
 
     @Override

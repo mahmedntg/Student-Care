@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mhamedsayed.studentcare.AdminActivity;
+import com.example.mhamedsayed.studentcare.DonorActivity;
 import com.example.mhamedsayed.studentcare.R;
 import com.example.mhamedsayed.studentcare.RequestDetailsActivity;
 import com.example.mhamedsayed.studentcare.StudentActivity;
@@ -92,8 +94,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.deleteTextView) {
-                StudentActivity mainActivity = (StudentActivity) activity;
-                mainActivity.deleteRequestItem(position, studentRequests.get(position).getKey());
+                if (userType.equals(UserType.ADMIN)) {
+                    AdminActivity adminActivity = (AdminActivity) activity;
+                    adminActivity.deleteRequestItem(position, studentRequests.get(position).getKey());
+                } else {
+                    StudentActivity studentActivity = (StudentActivity) activity;
+                    studentActivity.deleteRequestItem(position, studentRequests.get(position).getKey());
+                }
 
             } else if (v.getId() == R.id.nameTextView || v.getId() == R.id.statusTextView) {
                 Intent newIntent = new Intent(activity, RequestDetailsActivity.class);

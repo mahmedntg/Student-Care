@@ -90,6 +90,13 @@ public class AdminActivity extends AppCompatActivity {
                 });
 
     }
+    public void deleteRequestItem(int position, String key) {
+        progressDialog.show();
+        database.getReference("request").child(key).removeValue();
+        studentRequests.remove(position);
+        mAdapter.notifyDataSetChanged();
+        progressDialog.hide();
+    }
 
     @Override
     public void onDestroy() {
