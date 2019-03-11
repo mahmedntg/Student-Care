@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right|end"
         android:layout_margin="16dp"
-        android:src="@mipmap/ic_add_circle_black_48dp"
+        android:src="@mipmap/add"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp" />
 </android.support.design.widget.CoordinatorLayout>

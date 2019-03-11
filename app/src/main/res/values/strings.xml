@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easy Donation</string>
+    <string name="app_name">EasyDonate</string>
     <string name="action_settings">Settings</string>
     <string name="value_required_msg">{0} is required</string>
 </resources>
