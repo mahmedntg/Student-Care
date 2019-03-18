@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mhamedsayed.studentcare.AdminActivity;
-import com.example.mhamedsayed.studentcare.DonorActivity;
 import com.example.mhamedsayed.studentcare.R;
-import com.example.mhamedsayed.studentcare.RequestDetailsActivity;
 import com.example.mhamedsayed.studentcare.StudentActivity;
 
 import java.util.List;
@@ -102,12 +100,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                     studentActivity.deleteRequestItem(position, studentRequests.get(position).getKey());
                 }
 
-            } else if (v.getId() == R.id.nameTextView || v.getId() == R.id.statusTextView) {
-                Intent newIntent = new Intent(activity, RequestDetailsActivity.class);
-                StudentRequest studentRequest = studentRequests.get(position);
-                newIntent.putExtra("request", studentRequest);
-                activity.startActivity(newIntent);
-            }
+            } 
 
         }
 

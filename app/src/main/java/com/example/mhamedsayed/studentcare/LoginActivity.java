@@ -84,8 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                             User user = dataSnapshot.getValue(User.class);
                             if (user.getType().equals(UserType.STUDENT.getValue()))
                                 startActivity(new Intent(LoginActivity.this, StudentActivity.class));
-                            else if (user.getType().equals(UserType.DONOR.getValue()))
-                                startActivity(new Intent(LoginActivity.this, DonorActivity.class));
+
                             else if (user.getType().equals(UserType.ADMIN.getValue()))
                                 startActivity(new Intent(LoginActivity.this, AdminActivity
                                         .class));
