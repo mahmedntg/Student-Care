@@ -1,9 +1,11 @@
-package com.example.mhamedsayed.studentcare;
+package com.example.zainab.studentcare;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +13,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.mhamedsayed.studentcare.utils.User;
-import com.example.mhamedsayed.studentcare.utils.UserType;
+import com.example.zainab.studentcare.utils.User;
+import com.example.zainab.studentcare.utils.UserType;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -82,13 +84,17 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             User user = dataSnapshot.getValue(User.class);
-                            if (user.getType().equals(UserType.STUDENT.getValue()))
+                            if (user.getType().equals(UserType.STUDENT.getValue())) {
+                                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                                String token = preferences.getString("student_token", null);
+                                dataSnapshot.getRef().child("token").setValue(token);
                                 startActivity(new Intent(LoginActivity.this, StudentActivity.class));
-                            else if (user.getType().equals(UserType.DONOR.getValue()))
+                            } else if (user.getType().equals(UserType.DONOR.getValue())) {
                                 startActivity(new Intent(LoginActivity.this, DonorActivity.class));
-                            else if (user.getType().equals(UserType.ADMIN.getValue()))
+                            } else if (user.getType().equals(UserType.ADMIN.getValue())) {
                                 startActivity(new Intent(LoginActivity.this, AdminActivity
                                         .class));
+                            }
                         }
 
                         @Override

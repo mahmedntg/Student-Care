@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        tools:context="com.example.mhamedsayed.studentcare.RequestDetailsActivity">
+        tools:context="com.example.zainab.studentcare.RequestDetailsActivity">
 
         <TextView
             android:id="@+id/descriptionTextView"

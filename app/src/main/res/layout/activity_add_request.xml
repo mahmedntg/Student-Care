@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="15dp"
     android:orientation="vertical"
-    tools:context="com.example.mhamedsayed.studentcare.AddRequestActivity">
+    tools:context="com.example.zainab.studentcare.AddRequestActivity">
 
     <EditText
         android:id="@+id/nameEditText"

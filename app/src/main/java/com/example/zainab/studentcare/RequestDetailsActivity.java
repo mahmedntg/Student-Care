@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.studentcare;
+package com.example.zainab.studentcare;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -13,11 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.mhamedsayed.studentcare.utils.CloserDialogTimerTask;
-import com.example.mhamedsayed.studentcare.utils.RequestStatus;
-import com.example.mhamedsayed.studentcare.utils.StudentRequest;
-import com.example.mhamedsayed.studentcare.utils.User;
-import com.example.mhamedsayed.studentcare.utils.UserType;
+import com.example.zainab.studentcare.utils.CloserDialogTimerTask;
+import com.example.zainab.studentcare.utils.NotificationApp;
+import com.example.zainab.studentcare.utils.NotificationCall;
+import com.example.zainab.studentcare.utils.RequestStatus;
+import com.example.zainab.studentcare.utils.StudentRequest;
+import com.example.zainab.studentcare.utils.User;
+import com.example.zainab.studentcare.utils.UserType;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +42,8 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
     private AlertDialog alertDialog;
     private StudentRequest studentRequest;
     private Intent intent;
+    private User user;
+    private String studentToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
         rejectButton.setOnClickListener(this);
         Bundle extras = getIntent().getExtras();
         studentRequest = (StudentRequest) extras.get("request");
-        descriptionTV.setText("Request Description: " + studentRequest.getDescription());
+        descriptionTV.setText("MyRequest Description: " + studentRequest.getDescription());
         deptAmountTV.setText("Dept Amount: " + studentRequest.getDeptAmount() + " KWD");
         database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -86,7 +90,7 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
-        User user = dataSnapshot.getValue(User.class);
+        user = dataSnapshot.getValue(User.class);
         if (user.getType().equals(UserType.DONOR.getValue())) {
             payButton.setVisibility(View.VISIBLE);
             amountEditText.setVisibility(View.VISIBLE);
@@ -110,6 +114,7 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
                 studentLevelTV.setText("Student Level: " + user.getLevel());
                 studentState.setText("Student State: " + user.getState());
                 studentWorkTV.setText("Student Work Status: " + user.getWork());
+                studentToken = user.getToken();
                 progressDialog.hide();
             }
 
@@ -199,6 +204,7 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
+                sendNotification();
                 startActivity(intent);
             }
         });
@@ -210,5 +216,10 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
             }
         });
 
+    }
+
+    private void sendNotification() {
+        NotificationApp app = new NotificationApp();
+        app.sendNotification(studentToken, "Payment Succeed", "Donor " + user.getName() + " paid for you " + Double.parseDouble(amountEditText.getText().toString()) + ": KWD");
     }
 }

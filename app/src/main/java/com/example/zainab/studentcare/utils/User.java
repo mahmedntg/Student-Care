@@ -1,11 +1,11 @@
-package com.example.mhamedsayed.studentcare.utils;
+package com.example.zainab.studentcare.utils;
 
 /**
  * Created by mhamedsayed on 3/7/2019.
  */
 
 public class User {
-    private String userId, name, age, level, email, password, state, type, work;
+    private String userId, name, age, level, email, password, state, type, work, token;
 
     public User() {
     }
@@ -85,5 +85,11 @@ public class User {
         this.work = work;
     }
 
+    public String getToken() {
+        return token;
+    }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

@@ -8,7 +8,7 @@
     android:layout_centerVertical="true"
     android:orientation="vertical"
     android:background="@mipmap/donate_image"
-    tools:context="com.example.mhamedsayed.studentcare.LoginActivity">
+    tools:context="com.example.zainab.studentcare.LoginActivity">
 
     <EditText
         android:id="@+id/emailEditText"

@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.studentcare;
+package com.example.zainab.studentcare;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -10,8 +10,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.mhamedsayed.studentcare.utils.RequestStatus;
-import com.example.mhamedsayed.studentcare.utils.StudentRequest;
+import com.example.zainab.studentcare.utils.RequestStatus;
+import com.example.zainab.studentcare.utils.StudentRequest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,7 +58,7 @@ public class AddRequestActivity extends AppCompatActivity {
         String message = getString(R.string.value_required_msg).trim();
         StudentRequest studentRequest = new StudentRequest(name, description, RequestStatus.PENDING.getValue(), deptAmount);
         if (TextUtils.isEmpty(studentRequest.getName())) {
-            message = MessageFormat.format(message, "Request Name");
+            message = MessageFormat.format(message, "MyRequest Name");
             alertDialog.setMessage(message);
             alertDialog.show();
             return;
@@ -73,7 +73,7 @@ public class AddRequestActivity extends AppCompatActivity {
             alertDialog.show();
             return;
         }
-        progressDialog.setMessage("Adding Request");
+        progressDialog.setMessage("Adding MyRequest");
         progressDialog.show();
         String key = FirebaseDatabase.getInstance().getReference("request").push().getKey();
         studentRequest.setUserId(firebaseAuth.getCurrentUser().getUid());

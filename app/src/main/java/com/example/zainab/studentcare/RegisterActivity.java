@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.studentcare;
+package com.example.zainab.studentcare;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.mhamedsayed.studentcare.utils.User;
+import com.example.zainab.studentcare.utils.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

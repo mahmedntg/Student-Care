@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.studentcare.utils;
+package com.example.zainab.studentcare.utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.example.mhamedsayed.studentcare.AdminActivity;
-import com.example.mhamedsayed.studentcare.DonorActivity;
-import com.example.mhamedsayed.studentcare.R;
-import com.example.mhamedsayed.studentcare.RequestDetailsActivity;
-import com.example.mhamedsayed.studentcare.StudentActivity;
+import com.example.zainab.studentcare.AdminActivity;
+import com.example.zainab.studentcare.R;
+import com.example.zainab.studentcare.RequestDetailsActivity;
+import com.example.zainab.studentcare.StudentActivity;
 
 import java.util.List;
 

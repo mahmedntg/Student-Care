@@ -1,8 +1,7 @@
-package com.example.mhamedsayed.studentcare;
+package com.example.zainab.studentcare;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
@@ -17,10 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.mhamedsayed.studentcare.utils.RequestAdapter;
-import com.example.mhamedsayed.studentcare.utils.RequestStatus;
-import com.example.mhamedsayed.studentcare.utils.StudentRequest;
-import com.example.mhamedsayed.studentcare.utils.UserType;
+import com.example.zainab.studentcare.utils.RequestAdapter;
+import com.example.zainab.studentcare.utils.RequestStatus;
+import com.example.zainab.studentcare.utils.StudentRequest;
+import com.example.zainab.studentcare.utils.UserType;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DonorActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private RequestAdapter mAdapter;
     private FirebaseDatabase database;
@@ -42,7 +41,7 @@ public class DonorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donor);
+        setContentView(R.layout.activity_admin);
         emptyView = (TextView) findViewById(R.id.empty_view);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
@@ -57,7 +56,7 @@ public class DonorActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new RequestAdapter(studentRequests, this, UserType.DONOR);
+        mAdapter = new RequestAdapter(studentRequests, this, UserType.ADMIN);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -71,7 +70,7 @@ public class DonorActivity extends AppCompatActivity {
                         studentRequests.clear();
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             studentRequest = data.getValue(StudentRequest.class);
-                            if (studentRequest.getStatus().equals(RequestStatus.ACCEPTED.getValue())) {
+                            if (studentRequest.getStatus().equals(RequestStatus.PENDING.getValue()) || studentRequest.getStatus().equals(RequestStatus.COMPLETED.getValue())) {
                                 studentRequest.setKey(data.getKey());
                                 studentRequests.add(studentRequest);
                             }
@@ -90,6 +89,13 @@ public class DonorActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+    public void deleteRequestItem(int position, String key) {
+        progressDialog.show();
+        database.getReference("request").child(key).removeValue();
+        studentRequests.remove(position);
+        mAdapter.notifyDataSetChanged();
+        progressDialog.hide();
     }
 
     @Override

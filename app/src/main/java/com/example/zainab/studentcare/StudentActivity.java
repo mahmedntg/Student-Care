@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.studentcare;
+package com.example.zainab.studentcare;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,9 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.mhamedsayed.studentcare.utils.RequestAdapter;
-import com.example.mhamedsayed.studentcare.utils.StudentRequest;
-import com.example.mhamedsayed.studentcare.utils.UserType;
+import com.example.zainab.studentcare.utils.RequestAdapter;
+import com.example.zainab.studentcare.utils.StudentRequest;
+import com.example.zainab.studentcare.utils.UserType;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

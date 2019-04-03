@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.mhamedsayed.studentcare.AdminActivity">
+    tools:context="com.example.zainab.studentcare.AdminActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myRecyclerView"
