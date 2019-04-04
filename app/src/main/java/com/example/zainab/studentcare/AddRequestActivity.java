@@ -49,6 +49,13 @@ public class AddRequestActivity extends AppCompatActivity {
                 });
         alertDialog = alertDialogBuilder.create();
 
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddRequestActivity.this, StudentActivity.class));
+            }
+        });
+
     }
 
     public void addRequest(View view) {
@@ -82,5 +89,13 @@ public class AddRequestActivity extends AppCompatActivity {
         database.getReference("request").updateChildren(childUpdates);
         progressDialog.hide();
         startActivity(new Intent(this, StudentActivity.class));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
     }
 }

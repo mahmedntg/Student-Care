@@ -59,6 +59,13 @@ public class RegisterActivity extends AppCompatActivity {
         ((RadioButton) findViewById(R.id.singleRadio)).setChecked(true);
         ((RadioButton) findViewById(R.id.studentRadio)).setChecked(true);
         ((RadioButton) findViewById(R.id.workRadio)).setChecked(true);
+
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            }
+        });
     }
 
     public void registerUser(View view) {
@@ -74,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String type = ((RadioButton) findViewById(typeId)).getText().toString();
         final String work = ((RadioButton) findViewById(workId)).getText().toString();
         String message = getString(R.string.value_required_msg).trim();
-        final User user = new User(name, age, level, email,password, state, type, work);
+        final User user = new User(name, age, level, email, password, state, type, work);
         if (TextUtils.isEmpty(user.getName())) {
             message = MessageFormat.format(message, "Name");
             alertDialog.setMessage(message);

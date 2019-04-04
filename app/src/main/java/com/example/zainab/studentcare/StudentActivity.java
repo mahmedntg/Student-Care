@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,8 +14,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
+import com.example.zainab.studentcare.utils.DividerItemDecoration;
 import com.example.zainab.studentcare.utils.RequestAdapter;
 import com.example.zainab.studentcare.utils.StudentRequest;
 import com.example.zainab.studentcare.utils.UserType;
@@ -38,6 +40,7 @@ public class StudentActivity extends AppCompatActivity {
     private StudentRequest studentRequest;
     private ProgressDialog progressDialog;
     private TextView emptyView;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class StudentActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         studentRequests = new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -60,12 +63,24 @@ public class StudentActivity extends AppCompatActivity {
         mAdapter = new RequestAdapter(studentRequests, this, UserType.STUDENT);
         recyclerView.setAdapter(mAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent newIntent = new Intent(StudentActivity.this, AddRequestActivity.class);
                 startActivity(newIntent);
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
+                    fab.hide();
+                } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
+                    fab.show();
+                }
             }
         });
     }
@@ -83,7 +98,12 @@ public class StudentActivity extends AppCompatActivity {
                             studentRequest.setKey(data.getKey());
                             studentRequests.add(studentRequest);
                         }
+                        final LayoutAnimationController controller =
+                                AnimationUtils.loadLayoutAnimation(getApplicationContext(), R.anim.layout_animation_fall_down);
+
+                        recyclerView.setLayoutAnimation(controller);
                         mAdapter.notifyDataSetChanged();
+                        recyclerView.scheduleLayoutAnimation();
                         if (studentRequests.isEmpty()) {
                             emptyView.setVisibility(View.VISIBLE);
                         }
@@ -135,4 +155,5 @@ public class StudentActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

@@ -5,9 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/donate_1"
     tools:context="com.example.zainab.studentcare.DonorActivity">
 
     <android.support.v7.widget.RecyclerView
+        android:layout_margin="10dp"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
         android:id="@+id/myRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -50,6 +50,12 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog = alertDialogBuilder.create();
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        });
     }
 
     public void registerUser(View view) {

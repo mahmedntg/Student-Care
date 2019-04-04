@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/donate_1"
     android:orientation="vertical"
     tools:context="com.example.zainab.studentcare.StudentActivity">
 
@@ -11,6 +12,8 @@
         android:id="@+id/myRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
         android:layout_marginTop="40dp"
         android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
@@ -28,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right|end"
         android:layout_margin="16dp"
-        android:src="@mipmap/add"
+        android:backgroundTint="@color/btn"
+        android:src="@mipmap/baseline_add_black_48"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp" />
 </android.support.design.widget.CoordinatorLayout>

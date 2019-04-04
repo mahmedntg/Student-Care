@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
 import com.example.zainab.studentcare.utils.RequestAdapter;
@@ -38,6 +40,7 @@ public class DonorActivity extends AppCompatActivity {
     private StudentRequest studentRequest;
     private ProgressDialog progressDialog;
     private TextView emptyView;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class DonorActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         studentRequests = new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -76,7 +79,12 @@ public class DonorActivity extends AppCompatActivity {
                                 studentRequests.add(studentRequest);
                             }
                         }
+                        final LayoutAnimationController controller =
+                                AnimationUtils.loadLayoutAnimation(getApplicationContext(), R.anim.layout_animation_fall_down);
+
+                        recyclerView.setLayoutAnimation(controller);
                         mAdapter.notifyDataSetChanged();
+                        recyclerView.scheduleLayoutAnimation();
                         if (studentRequests.isEmpty()) {
                             emptyView.setVisibility(View.VISIBLE);
                         }

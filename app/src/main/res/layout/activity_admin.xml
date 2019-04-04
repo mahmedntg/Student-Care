@@ -5,10 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/donate_1"
     tools:context="com.example.zainab.studentcare.AdminActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myRecyclerView"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>

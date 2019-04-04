@@ -31,13 +31,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 
+import uk.co.onemandan.materialtextview.MaterialTextView;
+
 public class RequestDetailsActivity extends AppCompatActivity implements View.OnClickListener, ValueEventListener {
 
-    private TextView descriptionTV, deptAmountTV, studentNameTV, studentLevelTV, studentState, studentWorkTV;
+    private MaterialTextView descriptionTV, deptAmountTV, studentNameTV, studentLevelTV, studentState, studentWorkTV;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private EditText amountEditText;
-    private Button payButton, acceptButton, rejectButton;
+    private TextView payButton, acceptButton, rejectButton;
     private ProgressDialog progressDialog;
     private AlertDialog alertDialog;
     private StudentRequest studentRequest;
@@ -49,23 +51,23 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_details);
-        descriptionTV = (TextView) findViewById(R.id.descriptionTextView);
-        deptAmountTV = (TextView) findViewById(R.id.deptAmountTextView);
-        studentNameTV = (TextView) findViewById(R.id.studentNameTextView);
-        studentLevelTV = (TextView) findViewById(R.id.studentLevelTextView);
-        studentState = (TextView) findViewById(R.id.studentStateTextView);
-        studentWorkTV = (TextView) findViewById(R.id.studentWorkTextView);
+        descriptionTV = findViewById(R.id.descriptionTextView);
+        deptAmountTV = findViewById(R.id.deptAmountTextView);
+        studentNameTV = findViewById(R.id.studentNameTextView);
+        studentLevelTV = findViewById(R.id.studentLevelTextView);
+        studentState = findViewById(R.id.studentStateTextView);
+        studentWorkTV = findViewById(R.id.studentWorkTextView);
         amountEditText = (EditText) findViewById(R.id.amountEditText);
-        payButton = (Button) findViewById(R.id.payBTN);
+        payButton =  findViewById(R.id.payBTN);
         payButton.setOnClickListener(this);
-        acceptButton = (Button) findViewById(R.id.acceptBTN);
+        acceptButton = findViewById(R.id.acceptBTN);
         acceptButton.setOnClickListener(this);
-        rejectButton = (Button) findViewById(R.id.rejectBTN);
+        rejectButton = findViewById(R.id.rejectBTN);
         rejectButton.setOnClickListener(this);
         Bundle extras = getIntent().getExtras();
         studentRequest = (StudentRequest) extras.get("request");
-        descriptionTV.setText("MyRequest Description: " + studentRequest.getDescription());
-        deptAmountTV.setText("Dept Amount: " + studentRequest.getDeptAmount() + " KWD");
+        descriptionTV.setContentText(studentRequest.getDescription(), null);
+        deptAmountTV.setContentText(studentRequest.getDeptAmount() + " KWD", null);
         database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
@@ -110,10 +112,10 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                studentNameTV.setText("Student Name: " + user.getName());
-                studentLevelTV.setText("Student Level: " + user.getLevel());
-                studentState.setText("Student State: " + user.getState());
-                studentWorkTV.setText("Student Work Status: " + user.getWork());
+                studentNameTV.setContentText(user.getName(), null);
+                studentLevelTV.setContentText(user.getLevel(), null);
+                studentState.setContentText(user.getState(), null);
+                studentWorkTV.setContentText(user.getWork(), null);
                 studentToken = user.getToken();
                 progressDialog.hide();
             }
@@ -136,7 +138,7 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        Button b = (Button) v;
+        TextView b = (TextView) v;
         switch (b.getId()) {
             case R.id.payBTN:
                 payAmount();
@@ -221,5 +223,13 @@ public class RequestDetailsActivity extends AppCompatActivity implements View.On
     private void sendNotification() {
         NotificationApp app = new NotificationApp();
         app.sendNotification(studentToken, "Payment Succeed", "Donor " + user.getName() + " paid for you " + Double.parseDouble(amountEditText.getText().toString()) + ": KWD");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
     }
 }
