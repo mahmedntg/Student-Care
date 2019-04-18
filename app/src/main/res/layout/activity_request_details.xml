@@ -50,6 +50,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
+            android:visibility="gone"
             app:mtv_contentText=""
             app:mtv_labelText="Student State" />
 
@@ -60,6 +61,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
+            android:visibility="gone"
             app:mtv_contentText=""
             app:mtv_labelText="Student Level" />
 
@@ -70,6 +72,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
+            android:visibility="gone"
             app:mtv_contentText=""
             app:mtv_labelText="Student Work Status" />
 
@@ -87,8 +90,8 @@
             android:maxLines="1"
             android:padding="16dp"
             android:singleLine="true"
-            android:textColor="#ADCCE2"
-            android:textColorHint="#ADCCE2"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
             android:textSize="20dp"
             android:visibility="gone" />
 
