@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "243154339561-hgeq2foo50rclpqpsb6sq87hcln8acp9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mhamedsayed.studentcare",
+            "certificate_hash": "1d3a23abcccaea7be7053909b4f5891b0753b2c4"
+          }
+        },
+        {
           "client_id": "243154339561-lg44v6lfirha7rvig27ngbpedhnprbbg.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -33,20 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "243154339561-lg44v6lfirha7rvig27ngbpedhnprbbg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
